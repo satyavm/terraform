@@ -10,5 +10,5 @@ module "ec2_west2" {
     aws = aws.west
    }
   source = "./modules/ec2"
-  instance_type = "t3.micro"
+  instance_type = "t2.micro"
 }
