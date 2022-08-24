@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        git 'git-latest'
+    }
     stages {
         stage("Init"){ 
             steps {
