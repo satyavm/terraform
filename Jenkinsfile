@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    tools {
-        git 'git-latest'
-    }
-    stages {
+        stages {
         stage("Init"){ 
             steps {
                  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "root-key", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
