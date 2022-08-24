@@ -1,20 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage("init"){ 
+        stage("Init"){ 
             steps {
-
-            sh 'terraform init'
+                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "root-key", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+            sh 'terraform init''
+        }    
             }
         }
-        stage("plan"){
+        stage("Plan"){
     steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "root-key", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             sh 'terraform plan'
         }
         }
         }
-        stage("apply"){
+        stage("Apply"){
             steps {
             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: "root-key", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
             sh 'terraform apply'
